@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: __local_aars__:D.\Repositorios\MS-Word-Exporter-App\app\libs\poi-ooxml-4.1.1.jar:unspecified@jar">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/app/libs/poi-ooxml-4.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

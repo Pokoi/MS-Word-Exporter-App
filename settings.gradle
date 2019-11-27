@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':poi-ooxml-schemas-4.1.1', ':poi-ooxml-4.1.1', ':poi-4.1.1'
 rootProject.name='MSWordExporter'

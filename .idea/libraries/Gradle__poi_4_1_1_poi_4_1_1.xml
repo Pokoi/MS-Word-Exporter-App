@@ -1,0 +1,9 @@
+<component name="libraryTable">
+  <library name="Gradle: poi-4.1.1.poi-4.1.1">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/poi-4.1.1/poi-4.1.1.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

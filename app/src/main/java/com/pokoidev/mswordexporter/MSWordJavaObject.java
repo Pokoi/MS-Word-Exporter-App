@@ -29,16 +29,50 @@
 
 package com.pokoidev.mswordexporter;
 
+import org.apache.poi.xwpf.usermodel.XWPFDocument;
+import org.apache.poi.xwpf.usermodel.XWPFParagraph;
+import org.apache.poi.xwpf.usermodel.XWPFRun;
+
+import java.io.File;
+import java.io.FileOutputStream;
+
+
 public class MSWordJavaObject
 {
 
+    XWPFDocument document;
+    String documentTitle = "untitled.docx";
 
-    public MSWordJavaObject()
+    public MSWordJavaObject(String documentTitle)
     {
+        this.document       = new XWPFDocument();
+        this.documentTitle  = documentTitle + ".docx";
 
     }
 
 
+    public void AddParagraph(String paragraphText)
+    {
+        XWPFParagraph newParagraph  = document.createParagraph();
+        XWPFRun paragraphRun        = newParagraph.createRun();
+
+        paragraphRun.setText(paragraphText);
+    }
+
+    public void AddImage (String imagePath)
+    {
+        // Implement someday
+    }
+
+    public void ExportFile(File file) throws Exception
+    {
+        FileOutputStream out = new FileOutputStream(file);
+        document.write(out);
+        out.close();
+        document.close();
+    }
+
 
 
 }
+
