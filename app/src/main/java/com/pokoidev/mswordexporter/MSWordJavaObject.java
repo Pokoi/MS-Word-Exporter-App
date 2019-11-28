@@ -41,7 +41,7 @@ public class MSWordJavaObject
 {
 
     XWPFDocument document;
-    String documentTitle = "untitled.docx";
+    String       documentTitle = "untitled.docx";
 
     public MSWordJavaObject(String documentTitle)
     {
