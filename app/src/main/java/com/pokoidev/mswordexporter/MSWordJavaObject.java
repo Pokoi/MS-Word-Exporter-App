@@ -35,19 +35,30 @@ import org.apache.poi.xwpf.usermodel.XWPFRun;
 
 import java.io.File;
 import java.io.FileOutputStream;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 
 
 public class MSWordJavaObject
 {
 
-    XWPFDocument document;
-    String       documentTitle = "untitled.docx";
+    XWPFDocument         document;
+    MSWordParagraphStyle paragraphStyler;
 
-    public MSWordJavaObject(String documentTitle)
+    public MSWordJavaObject()
     {
-        this.document       = new XWPFDocument();
-        this.documentTitle  = documentTitle + ".docx";
+        this.document        = new XWPFDocument();
+        this.paragraphStyler = new MSWordParagraphStyle();
+    }
 
+    public MSWordJavaObject(String fileName) throws Exception
+    {
+        Path documentPath   = Paths.get(fileName);
+        this.document       = new XWPFDocument(Files.newInputStream(documentPath));
+        document.close();
+
+        this.paragraphStyler = new MSWordParagraphStyle();
     }
 
 
@@ -59,9 +70,12 @@ public class MSWordJavaObject
         paragraphRun.setText(paragraphText);
     }
 
-    public void AddImage (String imagePath)
-    {
-        // Implement someday
+    public void AddImage (String imageName, int width, int height) throws Exception {
+        XWPFParagraph image = document.createParagraph();
+        XWPFRun imageRun    = image.createRun();
+
+        Path imagePath = Paths.get(ClassLoader.getSystemResource(imageName).toURI());
+        imageRun.addPicture(Files.newInputStream(imagePath), XWPFDocument.PICTURE_TYPE_PNG, imagePath.getFileName().toString(), width, height);
     }
 
     public void ExportFile(File file) throws Exception

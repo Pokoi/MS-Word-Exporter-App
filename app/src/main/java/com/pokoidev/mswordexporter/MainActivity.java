@@ -21,7 +21,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        documentTitleContainer   = (EditText)   findViewById(R.id.editTextTitle);
         documentContentContainer = (EditText)   findViewById(R.id.editTextContent);
         generateDocumentButton   = (Button)     findViewById(R.id.button);
 
@@ -30,7 +29,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                MSWordJavaObject document = new MSWordJavaObject(documentTitleContainer.getText().toString());
+                MSWordJavaObject document = new MSWordJavaObject();
                 document.AddParagraph(documentContentContainer.getText().toString());
                 try
                 {
