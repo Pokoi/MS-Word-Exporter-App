@@ -22,6 +22,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         documentContentContainer = (EditText)   findViewById(R.id.editTextContent);
+        documentTitleContainer   = (EditText)   findViewById(R.id.editTextTitle);
         generateDocumentButton   = (Button)     findViewById(R.id.button);
 
         generateDocumentButton.setOnClickListener(new View.OnClickListener()
@@ -29,11 +30,24 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                MSWordJavaObject document = new MSWordJavaObject();
+                MSWordMetaData metaData = new MSWordMetaData(
+                                                            "Informe",
+                                                            "Informe de accesibilidad",
+                                                            "accesibilidad",
+                                                            "Evaluaciones del técnico especializado",
+                                                            " ",
+                                                            "Insertar nombre del técnico",
+                                                            " ",
+                                                            " ",
+                                                            "Fundación Once"
+                                                            );
+
+                MSWordJavaObject document = new MSWordJavaObject(metaData);
+                document.AddHeading(documentContentContainer.getText().toString(), 1);
                 document.AddParagraph(documentContentContainer.getText().toString());
                 try
                 {
-                    File file = new File(getExternalFilesDir(null), "doc.docx");
+                    File file = new File (getExternalFilesDir(null), document.getMetaData().getTitle() + ".doc");
                     document.ExportFile(file);
                     Toast.makeText(getApplicationContext(),"OK", Toast.LENGTH_LONG).show();
                 } catch (Exception e)
