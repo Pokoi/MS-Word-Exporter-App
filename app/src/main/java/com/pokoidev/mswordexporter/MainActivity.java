@@ -18,6 +18,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -30,6 +31,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
+                /*
                 MSWordMetaData metaData = new MSWordMetaData(
                                                             "Informe",
                                                             "Informe de accesibilidad",
@@ -42,7 +44,7 @@ public class MainActivity extends AppCompatActivity {
                                                             "Fundación Once"
                                                             );
 
-                MSWordJavaObject document = new MSWordJavaObject(metaData);
+                MSWordWritableDocument document = new MSWordWritableDocument(metaData);
                 document.AddHeading(documentContentContainer.getText().toString(), 1);
                 document.AddParagraph(documentContentContainer.getText().toString());
                 try
@@ -54,7 +56,22 @@ public class MainActivity extends AppCompatActivity {
                 {
                     Toast.makeText(getApplicationContext(),"NOT OK", Toast.LENGTH_LONG).show();
                     e.printStackTrace();
+                }*/
+
+                MSWordTemplate document = new MSWordTemplate(getExternalFilesDir(null) +"/"+ "template.xml");
+                document.Replace("centerName", "Holiwi");
+
+                try
+                {
+                    File file = new File (getExternalFilesDir(null),  "informe.doc");
+                    document.ExportFile(file);
+                    Toast.makeText(getApplicationContext(),"OK", Toast.LENGTH_LONG).show();
+                } catch (Exception e)
+                {
+                    Toast.makeText(getApplicationContext(),"NOT OK", Toast.LENGTH_LONG).show();
+                    e.printStackTrace();
                 }
+
 
             }
         });
