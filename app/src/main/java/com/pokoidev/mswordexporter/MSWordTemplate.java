@@ -94,6 +94,13 @@ public class MSWordTemplate
         this.content = this.content.replace(placeHolder, newValue);
     }
 
+    public void Extract (String start, String end)
+    {
+        this.content = this.content.substring(this.content.indexOf(start), this.content.indexOf(end) + end.length());
+        Replace(start, "");
+        Replace(end, "");
+    }
+
     ////////////////////////////////////////////////////////////////////////////////////////////////
     // DOCUMENT OPEN/CLOSE
     ////////////////////////////////////////////////////////////////////////////////////////////////
