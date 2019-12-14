@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v)
             {
-                /*
+
                 MSWordMetaData metaData = new MSWordMetaData(
                                                             "Informe",
                                                             "Informe de accesibilidad",
@@ -43,7 +43,7 @@ public class MainActivity extends AppCompatActivity {
                                                             " ",
                                                             "Fundación Once"
                                                             );
-
+                /*
                 MSWordWritableDocument document = new MSWordWritableDocument(metaData);
                 document.AddHeading(documentContentContainer.getText().toString(), 1);
                 document.AddParagraph(documentContentContainer.getText().toString());
@@ -60,6 +60,14 @@ public class MainActivity extends AppCompatActivity {
 
                 MSWordTemplate document = new MSWordTemplate(getExternalFilesDir(null) +"/"+ "template.xml");
                 document.Replace("centerName", "Holiwi");
+
+                MSWordWritableDocument auxDocument = new MSWordWritableDocument(metaData);
+                auxDocument.AddHeading("Esto es un heading", 1);
+                auxDocument.AddParagraph("Esto es un párrafo");
+                auxDocument.AddParagraph("Esto es otro párrafo");
+                String s = auxDocument.document.getBody().getContent();
+
+                document.Replace("centerAdress", s);
 
                 try
                 {
