@@ -48,6 +48,10 @@ public class MSWordTemplate
 {
     private String content;
 
+    /**
+     * Gets the document content
+     * @return The content of the document
+     */
     public String GetContent() { return this.content;}
 
     public MSWordTemplate(String path)
@@ -64,20 +68,30 @@ public class MSWordTemplate
     // READING THE FILE
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
-    //http://www.java2s.com/Code/Java/File-Input-Output/ConvertInputStreamtoString.htm
+    /**
+     * Converts an xml file to a string
+     * @param filePath The path of the xml file
+     * @return The string with the content of the xml file
+     * @throws Exception
+     */
     public String GetStringFromFile (String filePath) throws Exception {
-        File fl = new File(filePath);
-        FileInputStream fin = new FileInputStream(fl);
-        String ret = ConvertStreamToString(fin);
+        File            fl      = new File(filePath);
+        FileInputStream fin     = new FileInputStream(fl);
+        String          ret     = ConvertStreamToString(fin);
         fin.close();
         return ret;
     }
 
-
+    /***
+     * Auxiliar method for the xml-string conversion
+     * @param is
+     * @return
+     * @throws Exception
+     */
     private String ConvertStreamToString(InputStream is) throws Exception {
-        BufferedReader reader = new BufferedReader(new InputStreamReader(is));
-        StringBuilder sb = new StringBuilder();
-        String line = null;
+        BufferedReader  reader  = new BufferedReader(new InputStreamReader(is));
+        StringBuilder   sb      = new StringBuilder();
+        String          line    = null;
         while ((line = reader.readLine()) != null) {
             sb.append(line).append("\n");
         }
@@ -89,11 +103,22 @@ public class MSWordTemplate
     // REPLACING CONTENT
     ////////////////////////////////////////////////////////////////////////////////////////////////
 
+    /***
+     * Replaces, in the content of the document, a placeholder with a given content
+     * @param placeHolder The placeholder to replace
+     * @param newValue The content to replace in
+     */
     public void Replace(String placeHolder, String newValue)
     {
         this.content = this.content.replace(placeHolder, newValue);
     }
 
+    /***
+     * Deletes from the document all the content before the start marker and the content after 
+     * the end marker. Markers are deleted too.
+     * @param start The start marker 
+     * @param end The end marker
+     */
     public void Extract (String start, String end)
     {
         this.content = this.content.substring(this.content.indexOf(start), this.content.indexOf(end) + end.length());
